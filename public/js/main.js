@@ -16,3 +16,22 @@ jQuery.fn.preventDoubleSubmission = function() {
   });   
     
 };
+
+
+function notificacion(mensaje){
+
+	$.notify(mensaje, {
+	  clickToHide: true,
+	  autoHide: true,
+	  autoHideDelay: 5000,
+	  arrowShow: true,
+	  globalPosition: 'top center',
+	  className: 'success',
+	  showAnimation: 'slideDown',
+	  showDuration: 400,
+	  hideAnimation: 'slideUp',
+	  hideDuration: 200,
+	  gap: 20
+	});
+
+}

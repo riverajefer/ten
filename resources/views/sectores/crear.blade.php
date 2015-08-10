@@ -34,7 +34,7 @@
 				<input type="submit" value="Agregar" class="btn btn-success btn-block btn-lg" tabindex="7">
 				</div>
 			</div>			
-		</form>
+		{!! Form::close() !!}
 	 </div>
 	</div>
 </div>

@@ -23,3 +23,4 @@ Route::get('hola', function () {
 Route::get('formulario', 'Formulario\FormularioController@show');
 Route::post('formulario', 'Formulario\FormularioController@save');
 Route::resource('sector', 'SectorController');
+Route::resource('registro', 'RegistroController');
