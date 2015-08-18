@@ -14,8 +14,9 @@
 
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 
-			{!! Form::open(array('action' => 'RegistroController@store')) !!}
-			<h4>Crear Registro</h4>
+			{!! Form::model($registro, array('route' => array('registro.update', $registro->id), 'method' => 'PUT')) !!}
+
+			<h4>Modificar Registro</h4>
 			<hr>
 
 			<div class="row">
@@ -24,57 +25,32 @@
 					<select name="tipoComercio" id="tipoComercio" required="" class="form-control input-lg" tabindex="1">
 	                    <option value="">Tipo de Comercio</option>
 	                    @foreach($sectores as $sector)
-	                    	<option value="{{$sector->id}}">{{$sector->sector}}</option>
+
+		                    @if($sector->id == $registro->sector_id )
+		                    	<option selected value="{{$sector->id}}">{{$sector->sector}}</option>
+		                    @else
+		                    	<option value="{{$sector->id}}">{{$sector->sector}}</option>
+		                    @endif
+
 	                    @endforeach
                   	</select>
-
-					<!--
-				  <input list="tipoComercio" name="tipoComercio" placeholder="Tipo de Comercio" class="form-control input-lg">
-				  <datalist id="tipoComercio">
-				  	<option value="Hoteles">
-				    <option value="Calzado">
-				    <option value="Ropa">
-				    <option value="Celulares">
-				    <option value="Muebles">
-				    <option value="Restaurantes">
-				    <option value="Bares">
-				    <option value="Odontología">
-				    <option value="Centro médico">
-				    <option value="Opticas">
-				    <option value="Veterinarias">
-				    <option value="Peluquería">
-				    <option value="Gimnasios">
-				    <option value="Colegios">
-				    <option value="Variedades">
-				    <option value="Repuestos">
-				    <option value="Droguerías">
-				    <option value="Laboratorio Clínicos">
-				    <option value="Agencia de Viajes">
-				    <option value="Construcón">
-				    <option value="Super Mercado">
-				    <option value="Tienda de Mascotas">
-				    <option value="Servicios">
-				    <option value="Persona natural">
-				  </datalist>
-				  -->
-
 
 				</div>
 			</div>		
 			<div class="row">
 				<div class="form-group">
-	                <input type="text" name="empresa" id="empresa" class="form-control input-lg" placeholder="Empresa" tabindex="2" value="{{ old('empresa') }}" >
+	                <input type="text" name="empresa" id="empresa" class="form-control input-lg" placeholder="Empresa" tabindex="2" value="{{ $registro->empresa }}" >
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="text" name="encargado" id="encargado" class="form-control input-lg" placeholder="Persona encargada" tabindex="3" value="{{ old('encargado') }}">
+						<input type="text" name="encargado" id="encargado" class="form-control input-lg" placeholder="Persona encargada" tabindex="3" value="{{ $registro->encargado }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="text" name="cargo" id="cargo" class="form-control input-lg" placeholder="Cargo" tabindex="4" value="{{ old('cargo') }}">
+						<input type="text" name="cargo" id="cargo" class="form-control input-lg" placeholder="Cargo" tabindex="4" value="{{ $registro->cargo }}">
 					</div>
 				</div>
 			</div>			
@@ -84,17 +60,19 @@
 					<div class="form-group">
 						<select name="localidad" id="localidad" required="" class="form-control input-lg" tabindex="5">
 		                    <option value="">Loalidad</option>
-
-                			@foreach($localidad as $localidad)
-	                    		<option value="{{$localidad}}">{{$localidad}}</option>
+		                    @foreach($localidad as $localidad)
+		                    	@if($localidad == $registro->localidad)
+									<option selected value="{{$localidad}}">{{$localidad}}</option>
+		                    	@else
+		                    		<option value="{{$localidad}}">{{$localidad}}</option>
+		                    	@endif
 		                    @endforeach
-
 	                  	</select>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-					<input type="text" name="barrio" id="barrio" class="form-control input-lg" placeholder="Barrio" tabindex="6" value="{{ old('barrio') }}">
+					<input type="text" name="barrio" id="barrio" class="form-control input-lg" placeholder="Barrio" tabindex="6" value="{{ $registro->barrio }}">
 					</div>
 				</div>				
 
@@ -102,18 +80,18 @@
 
 			<div class="row">
 				<div class="form-group">
-					<input type="text" name="direccion" id="direccion" class="form-control input-lg" placeholder="Dirección" tabindex="7" value="{{ old('direccion') }}">
+					<input type="text" name="direccion" id="direccion" class="form-control input-lg" placeholder="Dirección" tabindex="7" value="{{ $registro->direccion }}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control input-lg" placeholder="Email" tabindex="8" value="{{ old('email') }}">
+						<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="8" value="{{ $registro->email }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="text" name="celular" id="celular" class="form-control input-lg" placeholder="Celular" tabindex="9" value="{{ old('celular') }}" >
+						<input type="text" name="celular" id="celular" class="form-control input-lg" placeholder="Celular" tabindex="9" value="{{ $registro->celular }}" >
 					</div>
 				</div>
 			</div>
@@ -121,12 +99,12 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="tel" name="telefono" id="telefono" class="form-control input-lg" placeholder="Teléfono" tabindex="10" value="{{ old('telefono') }}">
+						<input type="tel" name="telefono" id="telefono" class="form-control input-lg" placeholder="Teléfono" tabindex="10" value="{{ $registro->telefono }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="number" name="extension" id="extension" class="form-control input-lg" placeholder="Extensión" tabindex="11" value="{{ old('extension') }}">
+						<input type="number" name="extension" id="extension" class="form-control input-lg" placeholder="Extensión" tabindex="11" value="{{ $registro->extension }}">
 					</div>
 				</div>
 			</div>
@@ -136,8 +114,12 @@
 						<div class="form-group">
 						<select name="nivelInteres" id="nivelInteres" required="" class="form-control input-lg" tabindex="12">
 		                    <option value="">Nivel de Interés</option>
-	               			@foreach($nivel_interes as $interes)
-	                    		<option value="{{$interes}}">{{$interes}}</option>
+		                    @foreach($nivel_interes as $interes)
+		                    	@if($interes == $registro->nivel_interes)
+									<option selected value="{{$interes}}">{{$interes}}</option>
+		                    	@else
+		                    		<option value="{{$interes}}">{{$interes}}</option>
+		                    	@endif
 		                    @endforeach
 	                  	</select>
 						</div>
@@ -146,10 +128,15 @@
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
 						<select name="mensaje" id="mensaje" required="" class="form-control input-lg" tabindex="13">
-		                    <option value="">Mensaje</option>
-	               			@foreach($mensajes as $mensaje)
-	                    		<option value="{{$mensaje}}">{{$mensaje}}</option>
+
+		                    @foreach($mensajes as $mensaje)
+		                    	@if($mensaje == $registro->mensaje)
+									<option selected value="{{$mensaje}}">{{$mensaje}}</option>
+		                    	@else
+		                    		<option value="{{$mensaje}}">{{$mensaje}}</option>
+		                    	@endif
 		                    @endforeach		                    
+
 	                  	</select>
 					</div>					
 					</div>
@@ -157,18 +144,23 @@
 			<div class="row">
 				<div class="form-group">
 					<select name="servicioInteres" id="servicioInteres" required="" class="form-control input-lg" tabindex="14">
-	                    <option value="">Servicio de Interés</option>
 
-	                    @foreach($productos as $producto)
+					@foreach($productos as $producto)
+
+	                    @if($producto->id == $registro->producto_id )
+	                    	<option selected value="{{$producto->id}}">{{$producto->plan}}</option>
+	                    @else
 	                    	<option value="{{$producto->id}}">{{$producto->plan}}</option>
-	                    @endforeach	                    
+	                    @endif	
+
+	                 @endforeach
 
                   	</select>
 				</div>
 			</div>				
 			<div class="row">
 				<div class="form-group">
-					<textarea name="observaciones" class="form-control input-lg" id="observaciones" placeholder="Observaciones" tabindex="15">{{ old('observaciones') }}</textarea>
+					<textarea name="observaciones" class="form-control input-lg" id="observaciones" placeholder="Observaciones" tabindex="15">{{ $registro->observaciones }}</textarea>
 				</div>
 			</div>			
 			<hr>

@@ -22,5 +22,7 @@ Route::get('hola', function () {
 
 Route::get('formulario', 'Formulario\FormularioController@show');
 Route::post('formulario', 'Formulario\FormularioController@save');
-Route::resource('sector', 'SectorController');
+
+Route::resource('sector',   'SectorController');
+Route::resource('producto', 'ProductoController');
 Route::resource('registro', 'RegistroController');
