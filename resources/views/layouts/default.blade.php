@@ -1,34 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
-
-<title> @section('title') @show </title>  
-
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<meta name="description" content="">
-<meta name="keywords" content="" />
-<meta name="author" content="" />
-<link rel="shortcut icon" href="../favicon.ico">
-
 <head>
-<!--********** HEAD *************-->
-	@include('includes.head')
+    <meta charset="UTF-8">
+    <title> @section('title') @show </title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- REQUIRED JS SCRIPTS -->
+    @include('includes/styles')
+    <!-- REQUIRED JS SCRIPTS -->
+    @include('includes/scripts')
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body>
 
-<!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
- @include('includes.header')
+<body class="hold-transition skin-blue sidebar-mini">
 
-<!--********** Contenido ***************-->
-  @yield('content') 
-<!--********** Fin contenido ***********-->
+<!-- Notificaiones  -->
+@if (Session::has('message'))
+    <script> notificacion( '<?php echo Session::get('message') ?>' ) </script>
+@endif
+
+<div class="wrapper">
+
+    <!-- Header -->
+    @include('includes/header')
+
+    <!-- Sidebar -->
+    @include('includes/sidebar')
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+               @section('titulo') @show
+            </h1>
+            <!-- You can dynamically generate breadcrumbs here -->
+            <ol class="breadcrumb">
+                @section('breadcrumb') 
+                @show
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.content -->
+
+    </div><!-- /.content-wrapper -->
+
+    <!-- Footer -->
+    @include('includes/footer')
+
+</div><!-- ./wrapper -->
+
 
 </body>
 </html>

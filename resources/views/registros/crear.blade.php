@@ -1,22 +1,12 @@
 @extends('layouts/default')
 @section('content')
 
-@section('title')
-@parent
- ¡ Registro de Datos !
-@stop
+@section('title')  @parent Agregar Registro @stop
+@section('titulo') @parent Agregar Registro @stop
 
-
-
-<div class="container">
-
-<div class="row">
-
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+<div class="box-body crear">
 
 			{!! Form::open(array('action' => 'RegistroController@store')) !!}
-			<h4>Crear Registro</h4>
-			<hr>
 
 			<div class="row">
 				<div class="form-group">
@@ -191,7 +181,6 @@
 	</div>
 </div>
 
-</div>
 <hr>
 <script>
 	$('form').preventDoubleSubmission();

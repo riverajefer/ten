@@ -16,8 +16,34 @@ class RegistroController extends Controller
 
     public function __construct()
     {
+
+       $this->breadcrumbs = new \Creitive\Breadcrumbs\Breadcrumbs;
+       $this->breadcrumbs->addCrumb('registro', 'registro');
+
        $this->nivel_interes = collect(['Alto', 'Medio', 'Bajo', 'Ninguno']);
-       $this->localidad     = collect(['Antonio Nariño', 'Bosa', 'Engativad']);
+       $this->localidad     = collect([
+            'Usaquén',
+            'Chapinero',
+            'Santa Fe',
+            'San Cristóbal',
+            'Usme',
+            'Tunjuelito',
+            'Bosa',
+            'Kennedy',
+            'Fontibón',
+            'Engativá',
+            'Suba',
+            'Barrios Unidos',
+            'Teusaquillo',
+            'Los Mártires',
+            'Antonio Nariño',
+            'Puente Aranda',
+            'La Candelaria',
+            'Rafael Uribe Uribe',
+            'Ciudad Bolívar',
+            'Sumapaz',
+        ]);
+
        $this->mensajes  = collect([
         'Envíar portafolio por correo',
         'Envìar cotización por correo',
@@ -32,8 +58,17 @@ class RegistroController extends Controller
 
     public function index()
     {
+        $breadcrumbs = new \Creitive\Breadcrumbs\Breadcrumbs;
+        $breadcrumbs->addCrumb('Home', '/');
+        $breadcrumbs->addCrumb('Pages', 'pages');
+        $breadcrumbs->addCrumb('Subpage', 'subpage');
+        $breadcrumbs->addCrumb('Subsubpage', '/subsubpage');
+        $breadcrumbs->addCrumb('Other website', 'http://otherwebsite.com/some-page');
+
+        $miga = $breadcrumbs->render();
+
         $registros = Registro::all();
-        return view('registros.index', array('registros'=>$registros));        
+        return view('registros.index', array('registros'=>$registros, 'breadcrumbs'=>$miga));        
     }
 
     public function create()
