@@ -13,6 +13,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset ("/bower_components/admin-lte/dist/js/demo.js") }}"></script>
 
+<script src="{{ asset ("/bower_components/admin-lte/plugins/select2/select2.full.min.js") }}"></script>
+
+
 <script src="{{ asset('/js/vendor/notify.min.js') }}"></script>
 <!-- Main -->
 <script src="{{ asset ("/js/main.js") }}"></script>

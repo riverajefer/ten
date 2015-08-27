@@ -65,7 +65,11 @@
 	  </a>
 	  <a href="#" class="list-group-item"> 
 	  	<i class="fa fa-database"></i> <strong>Servicio de Interés: </strong> 
-	  	{{$registro->servicio_interes}}
+	  	<ul>
+		  	@foreach($registro->productos as $producto)
+			  		<li><span>{{  $producto->plan }}</span>	</li>
+		  	@endforeach
+	  	</ul>
 	  </a>
 	  <a href="#" class="list-group-item"> 
 	  	<i class="fa fa-commenting"></i> <strong>Observaciones: </strong> 

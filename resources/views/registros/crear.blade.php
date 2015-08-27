@@ -146,7 +146,7 @@
 				</div>
 			<div class="row">
 				<div class="form-group">
-					<select name="servicioInteres" id="servicioInteres" required="" class="form-control input-lg" tabindex="14">
+					<select name="servicioInteres[]" id="servicioInteres"  class="form-control select2" multiple="multiple" data-placeholder="Seleccione los servicios" style="width: 100%;" required tabindex="14">
 	                    <option value="">Servicio de Interés</option>
 
 	                    @foreach($productos as $producto)
@@ -184,6 +184,7 @@
 <hr>
 <script>
 	$('form').preventDoubleSubmission();
+	$(".select2").select2();
 </script>
 
 <!-- Finaliza el render de la pagina -->

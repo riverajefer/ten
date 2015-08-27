@@ -16,7 +16,13 @@
     background-color: #424D52;
 }
 
-
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #00A65A;
+    border: 1px solid #FFF;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #FFF;
+}
 
 
 

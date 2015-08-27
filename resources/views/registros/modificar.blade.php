@@ -129,21 +129,22 @@
 		</div>
 	<div class="row">
 		<div class="form-group">
-			<select name="servicioInteres" id="servicioInteres" required="" class="form-control input-lg" tabindex="14">
+			<select name="servicioInteres[]" id="servicioInteres"  class="form-control select2" multiple="multiple" data-placeholder="Seleccione los servicios" style="width: 100%;" required tabindex="14">
+			
+			@foreach($productos  as $key => $producto)
 
-			@foreach($productos as $producto)
-
-                @if($producto->id == $registro->producto_id )
-                	<option selected value="{{$producto->id}}">{{$producto->plan}}</option>
-                @else
-                	<option value="{{$producto->id}}">{{$producto->plan}}</option>
-                @endif	
+				@if (array_search($producto->id, $seleccionados) )
+					<option selected value="{{$producto->id}}">{{$producto->plan}}</option>
+				@else
+					<option value="{{$producto->id}}">{{$producto->plan}}</option>
+				@endif
 
              @endforeach
 
           	</select>
 		</div>
 	</div>				
+	
 	<div class="row">
 		<div class="form-group">
 			<textarea name="observaciones" class="form-control input-lg" id="observaciones" placeholder="Observaciones" tabindex="15">{{ $registro->observaciones }}</textarea>
@@ -171,6 +172,7 @@
 <hr>
 <script>
 	$('form').preventDoubleSubmission();
+	$(".select2").select2();
 </script>
 
 <!-- Finaliza el render de la pagina -->

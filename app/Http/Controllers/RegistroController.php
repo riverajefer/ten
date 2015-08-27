@@ -93,7 +93,6 @@ class RegistroController extends Controller
         $this->validate($request, [
             'tipoComercio'    => 'required',
             'empresa'         => 'required',
-            'encargado'       => 'required',
             'localidad'       => 'required',
             'email'           => 'required|email|max:255',
             'nivelInteres'    => 'required',
@@ -101,6 +100,7 @@ class RegistroController extends Controller
             'servicioInteres' => 'required',
         ]);
 
+        //return $request->servicioInteres;
         $registro = new Registro();
 
         $registro->sector_id        = $request->tipoComercio;
@@ -116,11 +116,16 @@ class RegistroController extends Controller
         $registro->extension        = $request->extension;
         $registro->nivel_interes    = $request->nivelInteres;
         $registro->mensaje          = $request->mensaje;
-        $registro->servicio_interes = $request->servicioInteres;
         $registro->observaciones    = $request->observaciones;
-
         $registro->save();
 
+        // guardar en la tabla registro_producto la relación
+        foreach ($request->servicioInteres as $key => $value) {
+            $registron = Registro::find($registro->id);
+            $registron->productos()->attach($value);
+            //$registro->productos()->attach($value);
+        }
+        
         Session::flash('message', 'Registro creado correctamente!');
         return redirect('registro');        
     }
@@ -134,9 +139,14 @@ class RegistroController extends Controller
 
     public function edit($id)
     {
-        $registro = Registro::find($id);
-        $sectores = Sector::all();
+        $registro  = Registro::find($id);
+        $sectores  = Sector::all();
         $productos = Producto::all();
+
+        $seleccionados = [];
+        foreach ($registro->productos as $key => $value) {
+            $seleccionados[$value->id] = $value->id;
+        }
 
         $datos = array(
             'registro'      => $registro, 
@@ -145,6 +155,7 @@ class RegistroController extends Controller
             'localidad'     => $this->localidad,
             'nivel_interes' => $this->nivel_interes,
             'mensajes'      => $this->mensajes,
+            'seleccionados' => $seleccionados,
         );
 
         return view('registros.modificar', $datos);        
@@ -180,10 +191,11 @@ class RegistroController extends Controller
         $registro->extension        = $request->extension;
         $registro->nivel_interes    = $request->nivelInteres;
         $registro->mensaje          = $request->mensaje;
-        $registro->servicio_interes = $request->servicioInteres;
         $registro->observaciones    = $request->observaciones;
 
         $registro->save();
+
+        $registro->productos()->sync($request->servicioInteres);
 
         Session::flash('message', 'Registro modificado correctamente!');
         return redirect('registro');  

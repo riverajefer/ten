@@ -10,7 +10,12 @@
 -->
 <link href="{{ asset("/bower_components/admin-lte/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
 
+<link href="{{ asset("/bower_components/admin-lte/plugins/select2/select2.min.css")}}" rel="stylesheet" type="text/css" />
+
+
+
 <link href="{{ asset("/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.css")}}" rel="stylesheet" type="text/css" />
+
 
 <link href="{{ asset("css/main.css")}}" rel="stylesheet" type="text/css" />
 <!--

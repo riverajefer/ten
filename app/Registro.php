@@ -20,5 +20,10 @@ class Registro extends Model
     	return $this->belongsTo('ten\Plan', 'plan_id');
     }
 
+    public function productos()
+    {
+        return $this->belongsToMany('ten\Producto', 'registro_producto', 'registro_id', 'producto_id' );
+    }
+
 }
 
